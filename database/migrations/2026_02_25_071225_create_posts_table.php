@@ -18,12 +18,12 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('body');
+            $table->text('content');
             $table->text('excerpt')->nullable();
             $table->string('status')->default(PostStatus::DRAFT->value);
             $table->dateTime('published_at')->nullable();
-            $table->unsignedBigInteger('view_count')->default(0);
-            $table->unsignedInteger('likes_count')->default(0);
+            $table->unsignedBigInteger('views')->default(0);
+            $table->unsignedInteger('likes')->default(0);
             $table->unsignedInteger('reading_time')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->json('meta')->nullable();
