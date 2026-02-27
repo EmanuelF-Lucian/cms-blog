@@ -48,9 +48,9 @@ class DatabaseSeeder extends Seeder
             $post->tags()->attach($tags->random(rand(1, min(4, $tags->count()))));
         });
 
-        $comments = ModelsComment::factory(100)->recycle($users, $posts)->create();
-        $comments->each(function ($comment) {
-            ModelsComment::factory(2)->reply($comment)->create();
+        $comments = ModelsComment::factory(100)->recycle($users)->recycle($posts)->create();
+        $comments->each(function ($comment) use ($users) {
+            ModelsComment::factory(2)->recycle($users)->reply($comment)->create();
         });
         $posts->each(function ($post) use ($users) {
             $users->random(rand(0, $users->count()))->each(function ($user) use ($post) {
