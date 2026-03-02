@@ -3,7 +3,12 @@ import { Link } from '@inertiajs/vue3';
 import { Menu } from 'lucide-vue-next';
 
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import { Sheet, SheetTrigger, SheetContent } from '@/components/ui/sheet';
+import {
+    Sheet,
+    SheetTrigger,
+    SheetContent,
+    SheetHeader,
+} from '@/components/ui/sheet';
 import ActionBtnsNav from './ActionBtnsNav.vue';
 
 const open = ref(false);

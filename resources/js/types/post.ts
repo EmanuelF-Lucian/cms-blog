@@ -1,4 +1,5 @@
 import type { User } from './auth';
+import type { Comment } from './comment';
 import type { Image } from './image';
 import type { Like } from './like';
 import type { Tag } from './tag';

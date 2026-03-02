@@ -3,7 +3,7 @@ import { Badge } from '@/components/ui/badge';
 import type { Post } from '../../types/post';
 
 defineProps<{
-    post: Post;
+    post: Post | null;
 }>();
 </script>
 
@@ -15,10 +15,10 @@ defineProps<{
         <!-- Background Image -->
         <img
             :src="
-                post.main_image?.path ??
+                post?.main_image?.path ??
                 'https://placeholdpicsum.dev/photo/1200/630'
             "
-            :alt="post.title"
+            :alt="post?.title"
             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
@@ -30,7 +30,7 @@ defineProps<{
         <!-- Content -->
         <div class="absolute right-0 bottom-0 left-0 p-6">
             <Badge
-                v-for="(tag, index) in post.tags"
+                v-for="(tag, index) in post?.tags"
                 :key="index"
                 variant="outline"
                 class="mb-3 border-white/30 bg-black/30 text-xs font-medium text-white backdrop-blur-sm"
@@ -40,7 +40,7 @@ defineProps<{
             <h2
                 class="text-2xl leading-tight font-semibold text-white lg:text-3xl"
             >
-                {{ post.title }}
+                {{ post?.title }}
             </h2>
         </div>
     </a>

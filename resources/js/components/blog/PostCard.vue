@@ -1,12 +1,10 @@
 <script setup lang="ts">
+import type { Post } from '../../types/post';
+
 // import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 defineProps<{
-    title: string;
-    image: string | null;
-    excerpt: string | null;
-    author: string;
-    readTime: number | null;
+    post: Post;
 }>();
 </script>
 
@@ -18,8 +16,11 @@ defineProps<{
         <!-- Post Image -->
         <div class="h-48 w-full overflow-hidden bg-muted">
             <img
-                :src="image ?? '#'"
-                :alt="title"
+                :src="
+                    post.main_image?.path ??
+                    'https://placeholdpicsum.dev/photo/1200/630'
+                "
+                :alt="post.title"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
         </div>
@@ -30,12 +31,12 @@ defineProps<{
             <h3
                 class="mt-1 line-clamp-2 text-base leading-snug font-semibold text-card-foreground transition-colors group-hover:text-primary"
             >
-                {{ title }}
+                {{ post.title }}
             </h3>
 
             <!-- Description -->
             <p class="mt-2 line-clamp-2 text-sm text-muted-foreground">
-                {{ excerpt }}
+                {{ post.excerpt }}
             </p>
 
             <!-- Author row -->
