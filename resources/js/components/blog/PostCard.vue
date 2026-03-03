@@ -5,9 +5,6 @@ import type { Post } from '../../types/post';
 import Avatar from '../ui/avatar/Avatar.vue';
 import AvatarFallback from '../ui/avatar/AvatarFallback.vue';
 import AvatarImage from '../ui/avatar/AvatarImage.vue';
-import Button from '../ui/button/Button.vue';
-
-// import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 defineProps<{
     post: Post;
@@ -46,16 +43,22 @@ defineProps<{
             <div
                 class="mt-auto flex items-center gap-2 border-t border-border pt-3"
             >
-                <Button
+                <div
                     class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-background"
                 >
                     <Avatar>
                         <AvatarImage :src="post.user?.avatar ?? ''" />
                         <AvatarFallback>{{
-                            post.user?.name?.charAt(0) ?? ''
+                            (post.user.name ?? '')
+                                .split(' ')
+                                .filter((n) => n.length > 0)
+                                .map((n) => n[0])
+                                .join('')
+                                .substring(0, 2)
+                                .toUpperCase()
                         }}</AvatarFallback>
                     </Avatar>
-                </Button>
+                </div>
 
                 <span class="text-sm font-medium text-card-foreground">{{
                     post.user?.name

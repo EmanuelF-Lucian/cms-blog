@@ -32,8 +32,9 @@ defineProps<Props>();
                 <Avatar>
                     <AvatarImage :src="user.avatar ?? ''" />
                     <AvatarFallback>{{
-                        user.name
-                            ?.split(' ')
+                        (user.name ?? '')
+                            .split(' ')
+                            .filter((n) => n.length > 0)
                             .map((n) => n[0])
                             .join('')
                             .substring(0, 2)
