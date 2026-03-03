@@ -4,12 +4,15 @@ import type { HTMLAttributes } from "vue"
 const props = defineProps<{
   class?: HTMLAttributes["class"]
 }>()
+defineOptions({
+  inheritAttrs: false,
+})
 </script>
 
 <template>
   <nav
     aria-label="breadcrumb"
-    data-slot="breadcrumb"
+    v-bind="$attrs"
     :class="props.class"
   >
     <slot />

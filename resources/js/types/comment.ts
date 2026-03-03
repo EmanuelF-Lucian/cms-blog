@@ -14,4 +14,7 @@ export interface Comment {
     post: Post;
     parent: Comment | null;
     likes: Like[];
+    likes_count: number;
+    replies_count: number;
+    replies: Comment[];
 }

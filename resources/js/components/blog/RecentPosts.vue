@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/vue3';
 import PostCard from '@/components/blog/PostCard.vue';
 import { Button } from '@/components/ui/button';
+import { index } from '../../routes/posts';
 import type { Post } from '../../types/post';
 
 defineProps<{
@@ -14,7 +15,7 @@ defineProps<{
         <!-- Section Header -->
         <div class="mb-6 flex items-center justify-between">
             <h2 class="text-xl font-semibold text-foreground">Recent Posts</h2>
-            <Link href="/* posts route */">
+            <Link :href="index().url">
                 <Button variant="outline" size="sm">All Posts</Button>
             </Link>
         </div>

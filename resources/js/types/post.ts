@@ -23,7 +23,9 @@ export interface Post {
     user: User;
     tags: Tag[];
     comments: Comment[];
+    comments_count: number;
     likes: Like[];
+    likes_count: number;
     main_image: Image | null;
     gallery_images: Image[] | null;
 }

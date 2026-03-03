@@ -48,7 +48,8 @@ class HomeController extends Controller
                 'title',
                 'slug',
                 'excerpt',
-                'published_at'
+                'published_at',
+                'reading_time',
             ]);
 
         return Inertia::render('Home', [

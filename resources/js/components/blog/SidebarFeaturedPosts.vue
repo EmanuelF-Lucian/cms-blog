@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+import { show } from '../../routes/posts';
 import type { Post } from '../../types/post';
 
 defineProps<{
@@ -13,7 +15,10 @@ defineProps<{
         </h3>
         <ul class="flex flex-col divide-y divide-border">
             <li v-for="post in posts.slice(0, 6)" :key="post.id">
-                <a href="#" class="group flex items-start gap-3 py-3">
+                <Link
+                    :href="show(post.slug).url"
+                    class="group flex items-start gap-3 py-3"
+                >
                     <!-- Thumbnail -->
                     <div
                         class="h-14 w-14 shrink-0 overflow-hidden rounded-md bg-muted"
@@ -33,7 +38,7 @@ defineProps<{
                     >
                         {{ post.title }}
                     </p>
-                </a>
+                </Link>
             </li>
         </ul>
     </div>

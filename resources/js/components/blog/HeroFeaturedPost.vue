@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
 import { Badge } from '@/components/ui/badge';
+import { show } from '../../routes/posts';
 import type { Post } from '../../types/post';
 
 defineProps<{
-    post: Post | null;
+    post: Post;
 }>();
 </script>
 
 <template>
-    <a
-        href="#"
+    <Link
+        :href="show(post?.slug).url"
         class="group relative block h-100 overflow-hidden rounded-xl lg:h-110"
     >
         <!-- Background Image -->
@@ -43,5 +45,5 @@ defineProps<{
                 {{ post?.title }}
             </h2>
         </div>
-    </a>
+    </Link>
 </template>

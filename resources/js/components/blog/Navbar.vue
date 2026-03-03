@@ -2,11 +2,12 @@
 import { Link } from '@inertiajs/vue3';
 
 import ActionBtnsNav from '../ActionBtnsNav.vue';
+import AppLogo from '../AppLogo.vue';
 import MobileMenu from '../MobileMenu.vue';
 
 withDefaults(
     defineProps<{
-        canRegister: boolean;
+        canRegister?: boolean;
     }>(),
     {
         canRegister: true,
@@ -15,8 +16,9 @@ withDefaults(
 
 const navLinks = [
     { label: 'Homepage', href: '/' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contact us', href: '#contact' },
+    { label: 'Posts', href: '/posts' },
+    { label: 'About', href: '#about' },
+    { label: 'Contact', href: '#contact' },
 ];
 </script>
 
@@ -28,28 +30,7 @@ const navLinks = [
             class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4"
         >
             <!-- Logo -->
-            <div class="flex items-center gap-2">
-                <div
-                    class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-foreground"
-                >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="h-4 w-4 text-background"
-                    >
-                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-                    </svg>
-                </div>
-                <span
-                    class="text-base font-semibold tracking-tight text-foreground"
-                    >Beyond UI</span
-                >
-            </div>
+            <AppLogo />
 
             <!-- Nav Links (desktop) -->
             <nav class="hidden items-center gap-7 lg:flex">

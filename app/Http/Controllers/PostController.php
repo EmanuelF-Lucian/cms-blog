@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class PostController extends Controller
 {
@@ -12,23 +13,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $posts = Post::whereNotNull('published_at')
+            ->orderBy('published_at', 'desc')
+            ->with([
+                'user',
+                'mainImage:id,imageable_id,imageable_type,path,role',
+            ])->paginate(9);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return Inertia::render('posts/Index', compact('posts'));
     }
 
     /**
@@ -36,30 +28,25 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
-    }
+        $tags = $post->tags()->get();
+        $post->load([
+            'user',
+            'comments' => function ($query) {
+                $query->with([
+                    'user',
+                    'replies.user',   // dacă vrei și user pe replies
+                ])
+                    ->withCount([
+                        'likes',   // likes_count
+                        'replies', // replies_count
+                    ]);
+            },
+            'mainImage:id,imageable_id,imageable_type,path,role',
+            'galleryImages:id,imageable_id,imageable_type,path,role',
+        ])->loadCount(['likes', 'comments']);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        //
+        return Inertia::render('posts/Show', ['post' => $post, 'tags' => $tags]);
     }
 }
