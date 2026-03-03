@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue';
 
+defineOptions({
+    inheritAttrs: false,
+});
+
 defineProps<{
     placeholder?: string;
 }>();

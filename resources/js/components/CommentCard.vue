@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ThumbsUp, MessageSquare } from 'lucide-vue-next';
-
 import CommentForm from './CommentForm.vue';
 import ReplyCard, { type Reply } from './ReplyCard.vue';
 import Button from './ui/button/Button.vue';

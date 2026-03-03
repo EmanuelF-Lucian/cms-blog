@@ -28,6 +28,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        abort_unless($post->published_at, 404);
+
         $tags = $post->tags()->get();
         $post->load([
             'user',

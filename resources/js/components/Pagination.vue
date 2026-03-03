@@ -8,7 +8,7 @@ defineProps<{
 
 <template>
     <div class="flex gap-1">
-        <template v-for="link in links" :key="link.label">
+        <template v-for="(link, index) in links" :key="index">
             <Link
                 v-if="link.url"
                 :href="link.url"

@@ -3,7 +3,6 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
-use Dom\Comment;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 

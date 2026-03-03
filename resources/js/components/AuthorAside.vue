@@ -41,7 +41,12 @@ const { format } = useFormatDate();
                 </li>
                 <li class="flex items-center gap-2.5 text-muted-foreground">
                     <Mail class="h-4 w-4 shrink-0 text-primary" />
-                    <span v-if="email">{{ email }}</span>
+                    <a
+                        v-if="email"
+                        :href="`mailto:${email}`"
+                        class="hover:underline"
+                        >{{ email }}</a
+                    >
                     <span v-else class="italic opacity-50">Not specified</span>
                 </li>
                 <li class="flex items-center gap-2.5 text-muted-foreground">

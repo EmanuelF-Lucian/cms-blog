@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, router } from '@inertiajs/vue3';
+import { Link } from '@inertiajs/vue3';
 import { Laptop, LogOut, Settings } from 'lucide-vue-next';
 import { dashboard, logout } from '../routes';
 import { edit } from '../routes/profile';
@@ -23,10 +23,6 @@ type Props = {
 };
 
 defineProps<Props>();
-
-const handleLogout = () => {
-    router.flushAll();
-};
 </script>
 
 <template>
@@ -34,8 +30,15 @@ const handleLogout = () => {
         <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" class="rounded-full">
                 <Avatar>
-                    <AvatarImage :src="'https://github.com/midudev.png'" />
-                    <AvatarFallback>LR</AvatarFallback>
+                    <AvatarImage :src="user.avatar ?? ''" />
+                    <AvatarFallback>{{
+                        user.name
+                            ?.split(' ')
+                            .map((n) => n[0])
+                            .join('')
+                            .substring(0, 2)
+                            .toUpperCase()
+                    }}</AvatarFallback>
                 </Avatar>
             </Button>
         </DropdownMenuTrigger>
@@ -82,8 +85,8 @@ const handleLogout = () => {
                     <Link
                         class="flex w-full cursor-pointer items-center text-left"
                         :href="logout()"
-                        prefetch
-                        @click="handleLogout"
+                        method="post"
+                        as="button"
                     >
                         <LogOut class="mr-2 h-4 w-4" />
                         Logout

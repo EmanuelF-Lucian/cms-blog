@@ -50,6 +50,10 @@ const submitComment = (postId: number) => {
             commentForm.reset();
             commentFormOpen.value = false;
         },
+        onError: () => {
+            // Errors are available via commentForm.errors
+            // Optionally show a toast or inline error
+        },
     });
 };
 
@@ -125,7 +129,10 @@ const { format } = useFormatDate();
                 />
 
                 <article class="space-y-6 border-b border-border pb-6">
-                    <div class="aspect-video overflow-hidden rounded-lg">
+                    <div
+                        v-if="post.main_image?.path"
+                        class="aspect-video overflow-hidden rounded-lg"
+                    >
                         <img
                             :src="post.main_image?.path"
                             :alt="post.title"

@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
         $posts->each(function ($post) use ($users) {
             $users->random(rand(0, $users->count()))->each(function ($user) use ($post) {
                 $post->likes()->create(['user_id' => $user->id]);
-            });;
+            });
         });
 
         $posts->each(function ($post) use ($users) {

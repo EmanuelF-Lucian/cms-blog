@@ -20,10 +20,10 @@ withDefaults(
         <HomeUserMenu :user="$page.props.auth.user" />
     </div>
     <template v-else>
-        <Link :href="login()" as="button">
+        <Link :href="login()">
             <Button variant="outline" class="font-medium">Login</Button>
         </Link>
-        <Link v-if="canRegister" :href="register()" as="button">
+        <Link v-if="canRegister" :href="register()">
             <Button class="font-medium">Register</Button>
         </Link>
     </template>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useFormatDate } from '../composables/useFormatDate';
 import Avatar from './ui/avatar/Avatar.vue';
 import AvatarFallback from './ui/avatar/AvatarFallback.vue';
 import AvatarImage from './ui/avatar/AvatarImage.vue';
@@ -18,7 +20,9 @@ const textSizeClass = {
     lg: 'text-base',
 } as const;
 
-const sizeKey = props.size ?? 'md';
+const sizeKey = computed(() => props.size ?? 'md');
+
+const { format } = useFormatDate();
 </script>
 
 <template>
@@ -26,7 +30,14 @@ const sizeKey = props.size ?? 'md';
         <Button variant="outline" size="icon" class="rounded-full">
             <Avatar>
                 <AvatarImage :src="avatar ?? ''" />
-                <AvatarFallback>{{ name.charAt(0) }}</AvatarFallback>
+                <AvatarFallback>{{
+                    name
+                        ?.split(' ')
+                        .map((n) => n[0])
+                        .join('')
+                        .substring(0, 2)
+                        .toUpperCase()
+                }}</AvatarFallback>
             </Avatar>
         </Button>
         <div class="flex flex-col gap-0.5">
@@ -37,7 +48,7 @@ const sizeKey = props.size ?? 'md';
                 {{ name }}
             </span>
             <span v-if="date" class="text-xs text-muted-foreground">{{
-                date
+                format(date)
             }}</span>
         </div>
     </div>

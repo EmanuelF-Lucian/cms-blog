@@ -17,16 +17,6 @@ class Comment extends Model
     use HasFactory, SoftDeletes;
 
 
-    protected function createdAt(): Attribute
-    {
-        return Attribute::get(function ($value) {
-            return Carbon::parse($value)
-                ->locale('en')
-                ->isoFormat('MMMM D, YYYY');
-        });
-    }
-
-
 
     public function user(): BelongsTo
     {

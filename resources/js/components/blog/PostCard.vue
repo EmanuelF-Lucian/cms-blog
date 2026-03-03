@@ -22,10 +22,7 @@ defineProps<{
         <!-- Post Image -->
         <div class="h-48 w-full overflow-hidden bg-muted">
             <img
-                :src="
-                    post.main_image?.path ??
-                    'https://placeholdpicsum.dev/photo/1200/630'
-                "
+                :src="post.main_image?.path ?? 'https://picsum.photos/1200/630'"
                 :alt="post.title"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
@@ -49,11 +46,13 @@ defineProps<{
             <div
                 class="mt-auto flex items-center gap-2 border-t border-border pt-3"
             >
-                <Button variant="outline" size="icon" class="rounded-full">
+                <Button
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-background"
+                >
                     <Avatar>
-                        <AvatarImage :src="post.user.avatar ?? ''" />
+                        <AvatarImage :src="post.user?.avatar ?? ''" />
                         <AvatarFallback>{{
-                            post.user?.name.charAt(0)
+                            post.user?.name?.charAt(0) ?? ''
                         }}</AvatarFallback>
                     </Avatar>
                 </Button>
