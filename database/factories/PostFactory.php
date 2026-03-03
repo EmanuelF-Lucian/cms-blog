@@ -24,11 +24,11 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'excerpt' => fake()->sentence(),
             'content' => fake()->paragraphs(6, true),
-            'status' => fake()->randomElement(['draft', 'published']),
-            'published_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'status' => $status = fake()->randomElement(['draft', 'published']),
+            'published_at' => $status === 'published' ? fake()->dateTimeBetween('-1 year', 'now') : null,
             'reading_time' => fake()->numberBetween(3, 12),
             'views' => fake()->numberBetween(0, 1000),
-            'is_featured' => false,
+            'is_featured' => fake()->boolean(),
             'likes' => fake()->numberBetween(0, 1000),
         ];
     }

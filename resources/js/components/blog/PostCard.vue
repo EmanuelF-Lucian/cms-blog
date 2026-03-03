@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+import { show } from '../../routes/posts';
 import type { Post } from '../../types/post';
-
-// import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import Avatar from '../ui/avatar/Avatar.vue';
+import AvatarFallback from '../ui/avatar/AvatarFallback.vue';
+import AvatarImage from '../ui/avatar/AvatarImage.vue';
 
 defineProps<{
     post: Post;
@@ -9,24 +12,21 @@ defineProps<{
 </script>
 
 <template>
-    <a
-        href="#"
-        class="group block overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
+    <Link
+        :href="show(post.slug).url"
+        class="group flex flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md"
     >
         <!-- Post Image -->
         <div class="h-48 w-full overflow-hidden bg-muted">
             <img
-                :src="
-                    post.main_image?.path ??
-                    'https://placeholdpicsum.dev/photo/1200/630'
-                "
+                :src="post.main_image?.path ?? 'https://picsum.photos/1200/630'"
                 :alt="post.title"
                 class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
         </div>
 
         <!-- Card Body -->
-        <div class="p-4">
+        <div class="flex flex-1 flex-col p-4">
             <!-- Title -->
             <h3
                 class="mt-1 line-clamp-2 text-base leading-snug font-semibold text-card-foreground transition-colors group-hover:text-primary"
@@ -35,32 +35,38 @@ defineProps<{
             </h3>
 
             <!-- Description -->
-            <p class="mt-2 line-clamp-2 text-sm text-muted-foreground">
+            <p class="mt-2 mb-3 line-clamp-2 text-sm text-muted-foreground">
                 {{ post.excerpt }}
             </p>
 
             <!-- Author row -->
-            <!-- <div
-                class="mt-4 flex items-center gap-2 border-t border-border pt-3"
+            <div
+                class="mt-auto flex items-center gap-2 border-t border-border pt-3"
             >
-                <Avatar class="h-6 w-6">
-                    <AvatarImage
-                        v-if="authorAvatar"
-                        :src="authorAvatar"
-                        :alt="authorName"
-                    />
-                    <AvatarFallback
-                        class="bg-muted text-xs text-muted-foreground"
-                        >{{ authorName.charAt(0) }}</AvatarFallback
-                    >
-                </Avatar>
+                <div
+                    class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-input bg-background"
+                >
+                    <Avatar>
+                        <AvatarImage :src="post.user?.avatar ?? ''" />
+                        <AvatarFallback>{{
+                            (post.user.name ?? '')
+                                .split(' ')
+                                .filter((n) => n.length > 0)
+                                .map((n) => n[0])
+                                .join('')
+                                .substring(0, 2)
+                                .toUpperCase()
+                        }}</AvatarFallback>
+                    </Avatar>
+                </div>
+
                 <span class="text-sm font-medium text-card-foreground">{{
-                    authorName
+                    post.user?.name
                 }}</span>
-                <span class="ml-auto text-xs text-muted-foreground">{{
-                    readTime
-                }}</span>
-            </div> -->
+                <span class="ml-auto text-xs text-muted-foreground"
+                    >{{ post.reading_time }} min read</span
+                >
+            </div>
         </div>
-    </a>
+    </Link>
 </template>

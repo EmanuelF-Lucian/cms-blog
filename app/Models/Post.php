@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Enums\ImageRole;
 use App\Enums\PostStatus;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -22,6 +24,7 @@ class Post extends Model
     protected $casts = [
         'meta' => 'array',
         'published_at' => 'datetime',
+        'created_at' => 'datetime',
         'status' => PostStatus::class,
     ];
 

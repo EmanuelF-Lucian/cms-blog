@@ -1,16 +1,20 @@
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
+import { home } from '../routes';
 </script>
 
 <template>
-    <div
-        class="flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground"
-    >
-        <AppLogoIcon class="size-5 fill-current text-white dark:text-black" />
-    </div>
-    <div class="ml-1 grid flex-1 text-left text-sm">
-        <span class="mb-0.5 truncate leading-tight font-semibold"
-            >Laravel Starter Kit</span
-        >
-    </div>
+    <Link :href="home().url" class="flex items-center gap-2">
+        <div class="flex items-center gap-2">
+            <div
+                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-foreground"
+            >
+                <AppLogoIcon />
+            </div>
+            <span class="text-base font-semibold tracking-tight text-foreground"
+                >Beyond UI</span
+            >
+        </div>
+    </Link>
 </template>
